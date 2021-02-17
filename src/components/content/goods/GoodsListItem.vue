@@ -1,6 +1,7 @@
 <template>
-  <div class="goods-item">
-    <img :src="goodsitem.show.img" @load="imageLoad">
+  <div class="goods-item" @click="itemclick">
+    <!--<img :src="showImage" @load="imageLoad">-->
+    <img v-lazy="showImage" @load="imageLoad">
     <div class="goods-info">
       <p>{{goodsitem.title}}</p>
       <span class="price">{{goodsitem.price}}</span>
@@ -20,10 +21,23 @@
             }
           }
       },
+      computed: {
+          showImage() {
+            return this.goodsitem.image || this.goodsitem.show.img
+          }
+      },
       //监听图片,通过@load,调用scroll的refresh函数，重新计算组件高度
       methods: {
         imageLoad(){
           this.$bus.$emit('itemimgLoad')
+        },
+        itemclick(){
+          this.$router.push({
+            path:'/detail',
+            query: {
+              iid:this.goodsitem.iid
+            }
+          })
         }
       }
     }

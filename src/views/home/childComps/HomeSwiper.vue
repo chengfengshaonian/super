@@ -2,7 +2,7 @@
     <div>
       <swiper>
         <swiper-item v-for="item in banners">
-          <a :href="item.link"><img :src="item.image"></a>
+          <a :href="item.link"><img :src="item.image" @load="imageload"></a>
         </swiper-item>
       </swiper>
     </div>
@@ -23,6 +23,20 @@
               return []
             }
           }
+      },
+      data(){
+          return{
+              isload: false
+          }
+      },
+      methods: {
+        imageload(){
+          //只需要发送一次
+          if (!this.isload){
+            this.$emit('swiperImageload')
+            this.isload=true
+          }
+        }
       }
     }
 </script>

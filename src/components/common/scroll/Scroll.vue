@@ -34,7 +34,9 @@
           //scroll到指定位置
         scrollTo(x,y,time){
           //console.log(x+y+time)
-          this.scroll.scrollTo(x,y,time)
+          if (this.scroll!=null){
+            this.scroll.scrollTo(x,y,time)
+          }
         },
         //下拉加载更多
         finishPu(){
@@ -42,7 +44,7 @@
         },
         //刷新
         refresh(){
-          this.scroll.refresh()
+          this.scroll && this.scroll.refresh()
         },
         initScroll(){
           this.$nextTick(() =>{
@@ -56,7 +58,7 @@
               pullUpLoad: this.pullUpLoad
             })
             //发送滚动结束后坐标事件
-            this.scroll.on('scrollEnd',(position) =>{
+            this.scroll.on('scroll',(position) =>{
               this.$emit('scrollpo',position)
             })
             //发送下拉加载事件
