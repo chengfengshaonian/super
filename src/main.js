@@ -4,6 +4,9 @@ import router from "./router";
 import store from "./store";
 import toast from "components/common/toast";
 
+
+import axios from "axios";
+
 import FastClick from 'fastclick'
 import VueLazyload from "vue-lazyload";
 
@@ -27,3 +30,9 @@ new Vue({
   router,
   store
 }).$mount('#app')
+
+/*axios({
+  url: "http://localhost:8887/moviefir"
+}).then(res =>{
+  console.log(res)
+})*/
